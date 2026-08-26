@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Future of AI Tools: What to Expect Next - AI Pulse</title>
+    <title>AI Pulse - Exploring Artificial Intelligence</title>
     <style>
         :root {
             --primary: #2563eb;
@@ -32,45 +32,57 @@
         }
         h1 {
             color: var(--primary);
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
         }
-        .date {
+        .subtitle {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             margin-bottom: 30px;
         }
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+        .post-list {
+            list-style: none;
+            padding: 0;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            text-decoration: none;
-            color: var(--primary);
+        .post-item {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .post-item:last-child {
+            border-bottom: none;
+        }
+        .post-link {
+            font-size: 1.2rem;
             font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
         }
-        .back-link:hover {
+        .post-link:hover {
             text-decoration: underline;
+        }
+        .post-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>The Future of AI Tools: What to Expect Next</h1>
-        <div class="date">Published on August 2026 | AI Pulse</div>
+        <h1>AI Pulse</h1>
+        <div class="subtitle">Your daily source for artificial intelligence insights, tools, and future trends.</div>
         
-        <p>Artificial Intelligence is evolving at an unprecedented pace. From automated coding assistants to advanced generative video models, the digital landscape is transforming rapidly.</p>
-        
-        <p>In this post, we explore the upcoming trends in AI tools, how they are reshaping everyday workflows, and what developers and creators should prepare for in the near future.</p>
-        
-        <h2>Key Takeaways</h2>
-        <p>1. Integration of multimodal AI models that process text, audio, and video simultaneously.<br>
-        2. Increased focus on local, lightweight AI models running directly on consumer hardware.<br>
-        3. Enhanced productivity boosts across software development and content creation fields.</p>
-
-        <a href="index.html" class="back-link">&larr; Back to Home</a>
+        <h2>Latest Posts</h2>
+        <ul class="post-list">
+            <li class="post-item">
+                <a href="post2.html" class="post-link">The Future of AI Tools: What to Expect Next</a>
+                <div class="post-date">August 2026</div>
+            </li>
+            <div class="post-item">
+                <a href="post1.html" class="post-link">Welcome to AI Pulse</a>
+                <div class="post-date">August 2026</div>
+            </li>
+        </ul>
     </div>
 </body>
 </html>
