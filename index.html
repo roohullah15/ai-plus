@@ -6,217 +6,407 @@
     <title>AI Pulse - Modern Tech, Linux & Security Blog</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
+            --bg-dark: #070b14;
+            --bg-card: #0f172a;
+            --accent-gold: #f59e0b;
+            --accent-glow: rgba(245, 158, 11, 0.2);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+        }
+        html {
+            scroll-behavior: smooth;
         }
         body {
-            font-family: Arial, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
             color: var(--text-main);
             line-height: 1.6;
             margin: 0;
             padding: 0;
         }
+        /* Top Navigation Header */
         header {
-            background: var(--card-bg);
+            background: rgba(7, 11, 20, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        header h1 {
-            color: var(--primary);
+        .logo {
+            color: var(--accent-gold);
             margin: 0;
             font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
-        .main-container {
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+        .cta-btn {
+            background: var(--accent-gold);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Hero & Blog Info Section */
+        .hero-section {
             max-width: 1200px;
-            margin: 30px auto;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 2.8rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+        .hero-section h1 span {
+            color: var(--accent-gold);
+        }
+        .hero-section p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* 4 Icon Cards Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+            text-align: left;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            height: 380px; /* ثابت لوړوالی ترڅو کارډونه یو شان وي */
+            position: relative;
+        }
+        .feature-header {
+            text-align: center;
+            cursor: pointer;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            user-select: none;
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent-gold);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 12px auto;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .feature-card h3 {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            margin: 0 0 5px 0;
+        }
+        .card-desc {
+            color: var(--accent-gold);
+            font-size: 0.85rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* Posts List inside Card (Hidden by default, shown inside via JS) */
+        .card-posts-list {
+            display: none; /* په پیل کې پټ وي */
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+            overflow-y: auto; /* ترڅو په کارډ دننه سکرول شي */
+            max-height: 250px;
+            padding-right: 5px;
+        }
+        .card-posts-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        .card-posts-list::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 10px;
+        }
+        .card-post-item {
+            background: rgba(7, 11, 20, 0.8);
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s;
+        }
+        .card-post-item:hover {
+            border-color: var(--accent-gold);
+        }
+        .card-post-item a {
+            text-decoration: none;
+            color: #38bdf8;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: block;
+            line-height: 1.3;
+        }
+        .card-post-item a:hover {
+            color: var(--accent-gold);
+            text-decoration: underline;
+        }
+        .card-post-date {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Main Container for About Us & Contact Us */
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto 50px auto;
             padding: 0 20px;
             display: flex;
+            flex-direction: column;
             gap: 30px;
         }
-        aside {
-            width: 300px;
-            flex-shrink: 0;
+        .card-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
         }
-        .sidebar-widget {
-            background: var(--card-bg);
+        .card-section h2 {
+            color: var(--accent-gold);
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        .contact-box {
+            background: var(--bg-dark);
             padding: 20px;
             border-radius: 8px;
             border: 1px solid var(--border);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            margin: 20px 0;
+            text-align: center;
         }
-        .sidebar-widget h3 {
-            margin-top: 0;
-            color: var(--text-main);
+        .contact-email {
             font-size: 1.2rem;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 10px;
-        }
-        .sidebar-widget ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .content-area {
-            flex-grow: 1;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        .content-area h2 {
-            color: var(--primary);
-            margin-top: 0;
-        }
-        .post-list-item {
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .post-list-item:last-child {
-            border-bottom: none;
-        }
-        .post-list-item a {
-            text-decoration: none;
-            color: var(--primary);
+            color: var(--accent-gold);
             font-weight: bold;
-            font-size: 1.1rem;
+            text-decoration: none;
         }
-        .post-list-item a:hover {
+        .contact-email:hover {
             text-decoration: underline;
-        }
-        .post-date {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 5px;
-        }
-        .category-section {
-            margin-bottom: 30px;
-        }
-        .category-section h3 {
-            color: #334155;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 5px;
-            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>AI Pulse</h1>
-        <p style="margin: 0; color: var(--text-muted);">Exploring Linux, Cloud, Security & AI (5 Posts per Category)</p>
+        <h1 class="logo">⚡ AI Pulse</h1>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#about-section">About Us</a></li>
+            <li><a href="#contact-section">Contact Us</a></li>
+        </ul>
+        <a href="#contact-section" class="cta-btn">Get Started</a>
     </header>
 
-    <div class="main-container">
-        <!-- Sidebar with Categories (5 Posts Each) -->
-        <aside>
-            <div class="sidebar-widget">
-                <h3>Quick Categories</h3>
-                <ul>
-                    <!-- 1. AI Tool Reviews -->
-                    <li>
-                        <details style="cursor: pointer;">
-                            <summary style="list-style: none; font-weight: bold; color: inherit; display: inline-block;">
-                                🤖 AI Tool Reviews
-                            </summary>
-                            <ul style="list-style-type: circle; margin-top: 8px; margin-bottom: 5px; padding-left: 20px; font-size: 0.9rem;">
-                                <li style="margin-bottom: 5px;"><a href="ai-tools1.html" style="text-decoration: none; color: #2563eb;">AI Coding Assistant Review</a></li>
-                                <li style="margin-bottom: 5px;"><a href="ai-tools2.html" style="text-decoration: none; color: #2563eb;">Top Text-to-Image Generators</a></li>
-                                <li style="margin-bottom: 5px;"><a href="ai-tools3.html" style="text-decoration: none; color: #2563eb;">Automating Workflows with LLMs</a></li>
-                                <li style="margin-bottom: 5px;"><a href="ai-tools4.html" style="text-decoration: none; color: #2563eb;">AI Voice Cloning Ethics</a></li>
-                                <li><a href="ai-tools5.html" style="text-decoration: none; color: #2563eb;">Smart Productivity Bots</a></li>
-                            </ul>
-                        </details>
-                    </li>
-
-                    <!-- 2. Latest Tech News -->
-                    <li>
-                        <details style="cursor: pointer;">
-                            <summary style="list-style: none; font-weight: bold; color: inherit; display: inline-block; margin-top: 10px;">
-                                🚀 Latest Tech News
-                            </summary>
-                            <ul style="list-style-type: circle; margin-top: 8px; margin-bottom: 5px; padding-left: 20px; font-size: 0.9rem;">
-                                <li style="margin-bottom: 5px;"><a href="latesttech1.html" style="text-decoration: none; color: #2563eb;">Next-Gen Hardware Shifts</a></li>
-                                <li style="margin-bottom: 5px;"><a href="latesttech2.html" style="text-decoration: none; color: #2563eb;">Cloud Computing Milestones</a></li>
-                                <li style="margin-bottom: 5px;"><a href="latesttech3.html" style="text-decoration: none; color: #2563eb;">Open Source Software Updates</a></li>
-                                <li style="margin-bottom: 5px;"><a href="latesttech4.html" style="text-decoration: none; color: #2563eb;">Global Semiconductor Trends</a></li>
-                                <li><a href="latesttech5.html" style="text-decoration: none; color: #2563eb;">The Rise of Edge Computing</a></li>
-                            </ul>
-                        </details>
-                    </li>
-
-                    <!-- 3. Security & Privacy -->
-                    <li>
-                        <details style="cursor: pointer;">
-                            <summary style="list-style: none; font-weight: bold; color: inherit; display: inline-block; margin-top: 10px;">
-                                🔒 Security & Privacy
-                            </summary>
-                            <ul style="list-style-type: circle; margin-top: 8px; margin-bottom: 5px; padding-left: 20px; font-size: 0.9rem;">
-                                <li style="margin-bottom: 5px;"><a href="security1.html" style="text-decoration: none; color: #2563eb;">Essential Cyber Hygiene</a></li>
-                                <li style="margin-bottom: 5px;"><a href="security2.html" style="text-decoration: none; color: #2563eb;">Advanced Threat Protection</a></li>
-                                <li style="margin-bottom: 5px;"><a href="security3.html" style="text-decoration: none; color: #2563eb;">Securing Linux Servers</a></li>
-                                <li style="margin-bottom: 5px;"><a href="security4.html" style="text-decoration: none; color: #2563eb;">Understanding Zero Trust</a></li>
-                                <li><a href="security5.html" style="text-decoration: none; color: #2563eb;">Preventing Phishing Attacks</a></li>
-                            </ul>
-                        </details>
-                    </li>
-
-                    <!-- 4. Tutorials & Guides -->
-                    <li>
-                        <details style="cursor: pointer;">
-                            <summary style="list-style: none; font-weight: bold; color: inherit; display: inline-block; margin-top: 10px;">
-                                💡 Tutorials & Guides
-                            </summary>
-                            <ul style="list-style-type: circle; margin-top: 8px; margin-bottom: 5px; padding-left: 20px; font-size: 0.9rem;">
-                                <li style="margin-bottom: 5px;"><a href="tutorials1.html" style="text-decoration: none; color: #2563eb;">Linux Terminal Basics</a></li>
-                                <li style="margin-bottom: 5px;"><a href="tutorials2.html" style="text-decoration: none; color: #2563eb;">Git and GitHub Workflow</a></li>
-                                <li style="margin-bottom: 5px;"><a href="tutorials3.html" style="text-decoration: none; color: #2563eb;">Deploying on Vercel</a></li>
-                                <li style="margin-bottom: 5px;"><a href="tutorials4.html" style="text-decoration: none; color: #2563eb;">HTML & CSS Structuring</a></li>
-                                <li><a href="tutorials5.html" style="text-decoration: none; color: #2563eb;">Setting Up SSH Keys</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                </ul>
-            </div>
-        </aside>
-
-        <!-- Main Content Area -->
-        <main class="content-area">
-            <h2>Welcome to AI Pulse</h2>
-            <p>Your ultimate destination featuring 20 professional technical articles divided equally across 5 posts per category (AI Tools, Latest Tech, Security, and Tutorials).</p>
+    <section class="hero-section">
+        <h1>Welcome to <span>AI Pulse</span></h1>
+        <p>Your ultimate digital hub for mastering Linux system administration, exploring smart AI tools, strengthening cybersecurity practices, and building modern web applications.</p>
+        
+        <div class="features-grid">
             
-            <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
-
-            <!-- Security & Privacy Posts Section -->
-            <div class="category-section">
-                <h3>🔒 Security & Privacy (Featured Posts)</h3>
-                
-                <div class="post-list-item">
-                    <a href="security1.html">Essential Cyber Hygiene: Protecting Your Digital Life in 2026</a>
-                    <div class="post-date">September 2026 | Security & Privacy</div>
+            <div class="feature-card">
+                <div class="feature-header" onclick="togglePosts('ai-tools-list', this)">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Tool Reviews</h3>
+                    <p class="card-desc">Click to open &darr;</p>
                 </div>
-
-                <div class="post-list-item">
-                    <a href="security2.html">Advanced Threat Protection: Guarding Infrastructure Against Modern Exploits</a>
-                    <div class="post-date">September 2026 | Security & Privacy</div>
+                <div id="ai-tools-list" class="card-posts-list">
+                    <div class="card-post-item">
+                        <a href="posts/ai-tools-1.html">AI Coding Assistant Review: Speeding Up Development Workflows</a>
+                        <div class="card-post-date">Sep 2026 | AI Tools</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/ai-tools-2.html">Top Text-to-Image Generators Compared for Designers</a>
+                        <div class="card-post-date">Sep 2026 | AI Tools</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/ai-tools-3.html">Automating Daily Workflows Using Large Language Models</a>
+                        <div class="card-post-date">Sep 2026 | AI Tools</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/ai-tools-4.html">The Growing Ethics and Challenges of AI Voice Cloning</a>
+                        <div class="card-post-date">Sep 2026 | AI Tools</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/ai-tools-5.html">Smart Productivity Bots to Keep Your Tasks Organized</a>
+                        <div class="card-post-date">Sep 2026 | AI Tools</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Other Categories Notice -->
-            <div class="category-section">
-                <h3>📚 Explore All Categories</h3>
-                <p>Use the sidebar on the left to expand and navigate through all 5 unique articles across <strong>AI Tool Reviews</strong>, <strong>Latest Tech News</strong>, <strong>Security & Privacy</strong>, and <strong>Tutorials & Guides</strong>.</p>
+            <div class="feature-card">
+                <div class="feature-header" onclick="togglePosts('tech-news-list', this)">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Latest Tech News</h3>
+                    <p class="card-desc">Click to open &darr;</p>
+                </div>
+                <div id="tech-news-list" class="card-posts-list">
+                    <div class="card-post-item">
+                        <a href="posts/tech-news-1.html">Next-Gen Hardware Shifts: What to Expect in Processors</a>
+                        <div class="card-post-date">Sep 2026 | Tech News</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/tech-news-2.html">Cloud Computing Milestones and Enterprise Adoption</a>
+                        <div class="card-post-date">Sep 2026 | Tech News</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/tech-news-3.html">Open Source Software Updates Changing the Landscape</a>
+                        <div class="card-post-date">Sep 2026 | Tech News</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/tech-news-4.html">Global Semiconductor Trends and Manufacturing Growth</a>
+                        <div class="card-post-date">Sep 2026 | Tech News</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/tech-news-5.html">The Rise of Edge Computing in Modern Architecture</a>
+                        <div class="card-post-date">Sep 2026 | Tech News</div>
+                    </div>
+                </div>
             </div>
-        </main>
+
+            <div class="feature-card">
+                <div class="feature-header" onclick="togglePosts('security-list', this)">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Security & Privacy</h3>
+                    <p class="card-desc">Click to open &darr;</p>
+                </div>
+                <div id="security-list" class="card-posts-list">
+                    <div class="card-post-item">
+                        <a href="posts/security-1.html">Essential Cyber Hygiene: Protecting Your Digital Life in 2026</a>
+                        <div class="card-post-date">Sep 2026 | Security</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/security-2.html">Advanced Threat Protection: Guarding Infrastructure Against Exploits</a>
+                        <div class="card-post-date">Sep 2026 | Security</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/security-3.html">Securing Linux Servers: Essential Hardening Steps</a>
+                        <div class="card-post-date">Sep 2026 | Security</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/security-4.html">Understanding Zero Trust Architecture in Enterprise Networks</a>
+                        <div class="card-post-date">Sep 2026 | Security</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/security-5.html">Preventing Sophisticated Phishing Attacks and Social Engineering</a>
+                        <div class="card-post-date">Sep 2026 | Security</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-header" onclick="togglePosts('tutorials-list', this)">
+                    <div class="feature-icon">💡</div>
+                    <h3>Tutorial & Guides</h3>
+                    <p class="card-desc">Click to open &darr;</p>
+                </div>
+                <div id="tutorials-list" class="card-posts-list">
+                    <div class="card-post-item">
+                        <a href="posts/tutorial-1.html">Linux Terminal Basics: Essential Commands Every Admin Needs</a>
+                        <div class="card-post-date">Sep 2026 | Tutorials</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/tutorial-2.html">Git and GitHub Workflow for Seamless Version Control</a>
+                        <div class="card-post-date">Sep 2026 | Tutorials</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/tutorial-3.html">Deploying Web Projects Efficiently on Vercel</a>
+                        <div class="card-post-date">Sep 2026 | Tutorials</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/tutorial-4.html">HTML & CSS Structuring for Modern Clean Websites</a>
+                        <div class="card-post-date">Sep 2026 | Tutorials</div>
+                    </div>
+                    <div class="card-post-item">
+                        <a href="posts/tutorial-5.html">Setting Up Secure SSH Keys for Remote Server Access</a>
+                        <div class="card-post-date">Sep 2026 | Tutorials</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="main-container">
+        <div id="about-section" class="card-section">
+            <h2>About Us</h2>
+            <div style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Welcome to AI Pulse - Your Trusted Tech Hub</div>
+            <p>AI Pulse is a modern technology blog dedicated to delivering authentic, original, and high-quality technical insights. Our focus centers on empowering developers, system administrators, and tech enthusiasts with practical knowledge in Linux, cloud engineering, and web development.</p>
+        </div>
+
+        <div id="contact-section" class="card-section">
+            <h2>Contact Us</h2>
+            <div style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Get in touch with the AI Pulse team</div>
+            <p>Have questions, feedback, or suggestions regarding our Linux tutorials, cybersecurity guides, or AI tool reviews? We would love to hear from you.</p>
+            
+            <div class="contact-box">
+                <p style="margin: 0 0 10px 0; color: var(--text-muted);">You can directly reach us via official email:</p>
+                <a href="mailto:aipluse.official.mail.@gmail.com" class="contact-email">aipluse.official.mail.@gmail.com</a>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function togglePosts(listId, headerElement) {
+            const listElement = document.getElementById(listId);
+            const descElement = headerElement.querySelector('.card-desc');
+            
+            if (listElement.style.display === "flex") {
+                listElement.style.display = "none";
+                descElement.innerText = "Click to open \u2193";
+            } else {
+                listElement.style.display = "flex";
+                descElement.innerText = "Click to close \u2191";
+            }
+        }
+    </script>
 
 </body>
 </html>
