@@ -25,12 +25,13 @@
             margin: 0;
             padding: 0;
         }
+        
         /* Top Navigation Header */
         header {
             background: rgba(7, 11, 20, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
-            padding: 20px 40px;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -41,13 +42,13 @@
         .logo {
             color: var(--accent-gold);
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: bold;
             letter-spacing: 1px;
         }
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 20px;
             list-style: none;
             margin: 0;
             padding: 0;
@@ -64,10 +65,11 @@
         .cta-btn {
             background: var(--accent-gold);
             color: #000;
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 6px;
             font-weight: bold;
             text-decoration: none;
+            font-size: 0.9rem;
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .cta-btn:hover {
@@ -78,12 +80,12 @@
         /* Hero & Blog Info Section */
         .hero-section {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 30px auto;
             padding: 0 20px;
             text-align: center;
         }
         .hero-section h1 {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             color: var(--text-main);
             margin-bottom: 15px;
         }
@@ -92,12 +94,12 @@
         }
         .hero-section p {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1rem;
             max-width: 800px;
-            margin: 0 auto 40px auto;
+            margin: 0 auto 35px auto;
         }
 
-        /* 4 Icon Cards Section */
+        /* 4 Icon Cards Section (Responsive Grid) */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -113,7 +115,7 @@
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
-            height: 380px; /* ثابت لوړوالی ترڅو کارډونه یو شان وي */
+            height: 380px;
             position: relative;
         }
         .feature-header {
@@ -148,13 +150,13 @@
             font-weight: 600;
         }
 
-        /* Posts List inside Card (Hidden by default, shown inside via JS) */
+        /* Posts List inside Card */
         .card-posts-list {
-            display: none; /* په پیل کې پټ وي */
+            display: none;
             flex-direction: column;
             gap: 10px;
             margin-top: 15px;
-            overflow-y: auto; /* ترڅو په کارډ دننه سکرول شي */
+            overflow-y: auto;
             max-height: 250px;
             padding-right: 5px;
         }
@@ -204,7 +206,7 @@
         }
         .card-section {
             background: var(--bg-card);
-            padding: 35px;
+            padding: 30px;
             border-radius: 14px;
             border: 1px solid var(--border);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
@@ -212,7 +214,7 @@
         .card-section h2 {
             color: var(--accent-gold);
             margin-top: 0;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
         .contact-box {
             background: var(--bg-dark);
@@ -223,18 +225,56 @@
             text-align: center;
         }
         .contact-email {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--accent-gold);
             font-weight: bold;
             text-decoration: none;
+            word-break: break-all;
         }
         .contact-email:hover {
             text-decoration: underline;
+        }
+
+        /* ================= MOBILE RESPONSIVE STYLES ================= */
+        @media screen and (max-width: 768px) {
+            header {
+                padding: 12px 15px;
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-links {
+                gap: 15px;
+            }
+            .hero-section {
+                margin: 20px auto;
+                padding: 0 15px;
+            }
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+            .hero-section p {
+                font-size: 0.95rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr; /* په موبایل کې هر کارډ په پوره پلنوالي (Full Width) راځي */
+                gap: 20px;
+            }
+            .feature-card {
+                height: auto; /* په موبایل کې لوړوالی ازاد وي ترڅو محتوا په اسانۍ ځای شي */
+                min-height: 220px;
+            }
+            .main-container {
+                padding: 0 15px;
+            }
+            .card-section {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Header & Navbar with Logo -->
     <header>
         <h1 class="logo">⚡ AI Pulse</h1>
         <ul class="nav-links">
@@ -245,12 +285,15 @@
         <a href="#contact-section" class="cta-btn">Get Started</a>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero-section">
         <h1>Welcome to <span>AI Pulse</span></h1>
         <p>Your ultimate digital hub for mastering Linux system administration, exploring smart AI tools, strengthening cybersecurity practices, and building modern web applications.</p>
         
+        <!-- 4 Icon Cards -->
         <div class="features-grid">
             
+            <!-- 1. AI Tool Reviews Card -->
             <div class="feature-card">
                 <div class="feature-header" onclick="togglePosts('ai-tools-list', this)">
                     <div class="feature-icon">🤖</div>
@@ -281,6 +324,7 @@
                 </div>
             </div>
 
+            <!-- 2. Latest Tech News Card -->
             <div class="feature-card">
                 <div class="feature-header" onclick="togglePosts('tech-news-list', this)">
                     <div class="feature-icon">🚀</div>
@@ -311,6 +355,7 @@
                 </div>
             </div>
 
+            <!-- 3. Security & Privacy Card -->
             <div class="feature-card">
                 <div class="feature-header" onclick="togglePosts('security-list', this)">
                     <div class="feature-icon">🔒</div>
@@ -341,6 +386,7 @@
                 </div>
             </div>
 
+            <!-- 4. Tutorial & Guides Card -->
             <div class="feature-card">
                 <div class="feature-header" onclick="togglePosts('tutorials-list', this)">
                     <div class="feature-icon">💡</div>
@@ -374,35 +420,42 @@
         </div>
     </section>
 
+    <!-- Lower Section: About Us & Contact Us -->
     <div class="main-container">
+        <!-- About Us Section -->
         <div id="about-section" class="card-section">
             <h2>About Us</h2>
-            <div style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Welcome to AI Pulse - Your Trusted Tech Hub</div>
+            <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Welcome to AI Pulse - Your Trusted Tech Hub</div>
             <p>AI Pulse is a modern technology blog dedicated to delivering authentic, original, and high-quality technical insights. Our focus centers on empowering developers, system administrators, and tech enthusiasts with practical knowledge in Linux, cloud engineering, and web development.</p>
         </div>
 
+        <!-- Contact Us Section -->
         <div id="contact-section" class="card-section">
             <h2>Contact Us</h2>
-            <div style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Get in touch with the AI Pulse team</div>
+            <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Get in touch with the AI Pulse team</div>
             <p>Have questions, feedback, or suggestions regarding our Linux tutorials, cybersecurity guides, or AI tool reviews? We would love to hear from you.</p>
             
             <div class="contact-box">
-                <p style="margin: 0 0 10px 0; color: var(--text-muted);">You can directly reach us via official email:</p>
+                <p style="margin: 0 0 8px 0; color: var(--text-muted); font-size: 0.9rem;">You can directly reach us via official email:</p>
                 <a href="mailto:aipluse.official.mail.@gmail.com" class="contact-email">aipluse.official.mail.@gmail.com</a>
             </div>
         </div>
     </div>
 
+    <!-- JavaScript to toggle posts -->
     <script>
         function togglePosts(listId, headerElement) {
             const listElement = document.getElementById(listId);
+            const cardElement = headerElement.closest('.feature-card');
             const descElement = headerElement.querySelector('.card-desc');
             
             if (listElement.style.display === "flex") {
                 listElement.style.display = "none";
+                cardElement.style.height = window.innerWidth > 768 ? "380px" : "auto";
                 descElement.innerText = "Click to open \u2193";
             } else {
                 listElement.style.display = "flex";
+                cardElement.style.height = window.innerWidth > 768 ? "380px" : "auto";
                 descElement.innerText = "Click to close \u2191";
             }
         }
