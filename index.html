@@ -3,306 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Pulse - Latest AI News & Tool Reviews</title>
-    <meta name="google-site-verification" content="x1kurgHwghFBbrnaPSi4ZWTRwglV5zYQ9Q6e41tm40A" />
+    <title>AI Pulse - Modern Tech, Linux & Security Blog</title>
     <style>
         :root {
             --primary: #2563eb;
-            --primary-dark: #1d4ed8;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
         body {
+            font-family: Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
+            margin: 0;
+            padding: 0;
         }
-
-        /* Header & Navigation */
         header {
             background: var(--card-bg);
             border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+        header h1 {
             color: var(--primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            margin: 0;
+            font-size: 1.8rem;
         }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        /* Layout Container */
-        .container {
+        .main-container {
             max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-                padding: 0 1rem;
-            }
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            color: white;
-            padding: 3rem 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            grid-column: 1 / -1;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
-            max-width: 700px;
-        }
-
-        .btn {
-            background: white;
-            color: var(--primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: background 0.2s, transform 0.1s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: #f1f5f9;
-            transform: translateY(-2px);
-        }
-
-        /* Main Content & Articles */
-        .main-content {
+            margin: 30px auto;
+            padding: 0 20px;
             display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            gap: 30px;
         }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-
-        .card h2 {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
-        /* Sidebar */
         aside {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            width: 300px;
+            flex-shrink: 0;
         }
-
         .sidebar-widget {
             background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
-
         .sidebar-widget h3 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
+            margin-top: 0;
+            color: var(--text-main);
+            font-size: 1.2rem;
             border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
         }
-
         .sidebar-widget ul {
             list-style: none;
+            padding: 0;
+            margin: 0;
         }
-
-        .sidebar-widget ul li {
-            margin-bottom: 0.75rem;
-        }
-
-        .sidebar-widget ul li a {
-            text-decoration: none;
-            color: var(--text-muted);
-            transition: color 0.2s;
-        }
-
-        .sidebar-widget ul li a:hover {
-            color: var(--primary);
-        }
-
-        /* Footer */
-        footer {
+        .content-area {
+            flex-grow: 1;
             background: var(--card-bg);
-            border-top: 1px solid var(--border);
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .content-area h2 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        .post-list-item {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .post-list-item:last-child {
+            border-bottom: none;
+        }
+        .post-list-item a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .post-list-item a:hover {
+            text-decoration: underline;
+        }
+        .post-date {
+            font-size: 0.85rem;
             color: var(--text-muted);
+            margin-top: 5px;
+        }
+        .category-section {
+            margin-bottom: 30px;
+        }
+        .category-section h3 {
+            color: #334155;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
-        <div class="nav-container">
-            <a href="#" class="logo">⚡ AI Pulse</a>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#articles">Articles</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-            </ul>
-        </div>
+        <h1>AI Pulse</h1>
+        <p style="margin: 0; color: var(--text-muted);">Exploring Linux, Cloud, Security & AI (5 Posts per Category)</p>
     </header>
 
-    <!-- Main Grid Container -->
-    <div class="container">
-
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>Welcome to AI Pulse</h1>
-            <p>Your ultimate destination for cutting-edge artificial intelligence news, deep tool reviews, and the latest technological breakthroughs shaping our digital world.</p>
-            <button class="btn" onclick="exploreAlert()">Explore Now</button>
-        </section>
-
-        <!-- Main Articles Area -->
-        <main class="main-content">
-            <article class="card" id="articles">
-                <h2>Featured Article: The Evolution of AI in 2026</h2>
-                <p><strong>Artificial Intelligence</strong> continues to transform industries at an unprecedented pace. From advanced multi-modal generative models to autonomous workplace agents, the technological landscape is shifting rapidly in 2026.</p>
-                <p>In this comprehensive review, we analyze the top-performing tools that are empowering developers, designers, and businesses worldwide to achieve maximum productivity and security. Modern AI systems are no longer just assistants; they are active collaborators in software engineering, creative design, and data security.</p>
-                <h3 style="margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1.2rem; color: var(--primary);">Key Breakthroughs This Year:</h3>
-                <ul style="margin-left: 1.5rem; color: var(--text-muted); margin-bottom: 1rem;">
-                    <li><strong>Autonomous Agents:</strong> Capable of handling complex, multi-step workflows without constant human intervention.</li>
-                    <li><strong>Enhanced Privacy Models:</strong> Localized AI execution ensuring personal and financial data remain strictly secure.</li>
-                    <li><strong>Cross-Platform Integration:</strong> Seamless embedding of AI tools into everyday development environments like VS Code and web browsers.</li>
-                </ul>
-                <p>Stay tuned to <strong>AI Pulse</strong> as we continue to test, review, and bring you the latest updates on the tools shaping tomorrow's digital world.</p>
-            </article>
-
-            <!-- About Us Section -->
-            <section class="card" id="about">
-                <h2>About Us</h2>
-                <p><strong>AI Pulse</strong> is an independent digital media platform dedicated to exploring the fast-paced world of Artificial Intelligence. Our mission is to bridge the gap between complex AI breakthroughs and everyday tech enthusiasts.</p>
-                <p>We provide accurate updates on emerging AI tools, machine learning frameworks, software reviews, and cybersecurity insights. Whether you are a developer, entrepreneur, or technology lover, AI Pulse keeps you informed with reliable and unbiased content.</p>
-            </section>
-        </main>
-
-        <!-- Sidebar -->
+    <div class="main-container">
+        <!-- Sidebar with Categories (5 Posts Each) -->
         <aside>
-<div class="sidebar-widget">
-    <h3>Quick Categories</h3>
-    <ul>
-        <li><a href="ai-tools1.html">🤖 AI Tool Reviews</a></li>
-        <li><a href="latesttech1.html">🚀 Latest Tech News</a></li>
-        <li>
-            <details style="cursor: pointer;">
-                <summary style="list-style: none; font-weight: bold; color: inherit; display: inline-block;">
-                    🔒 Security & Privacy
-                </summary>
-                <ul style="list-style-type: circle; margin-top: 8px; margin-bottom: 5px; padding-left: 20px; font-size: 0.9rem;">
-                    <li style="margin-bottom: 5px;"><a href="security1.html" style="text-decoration: none; color: #2563eb;">Essential Cyber Hygiene</a></li>
-                    <li><a href="security2.html" style="text-decoration: none; color: #2563eb;">Advanced Threat Protection</a></li>
-                </ul>
-            </details>
-        </li>
-        <li><a href="tutorials1.html">💡 Tutorials & Guides</a></li>
-    </ul>
-</div>
-            🔒 Security & Privacy
-                </summary>
- 
+            <div class="sidebar-widget">
+                <h3>Quick Categories</h3>
+                <ul>
+                    <!-- 1. AI Tool Reviews -->
+                    <li>
+                        <details style="cursor: pointer;">
+                            <summary style="list-style: none; font-weight: bold; color: inherit; display: inline-block;">
+                                🤖 AI Tool Reviews
+                            </summary>
+                            <ul style="list-style-type: circle; margin-top: 8px; margin-bottom: 5px; padding-left: 20px; font-size: 0.9rem;">
+                                <li style="margin-bottom: 5px;"><a href="ai-tools1.html" style="text-decoration: none; color: #2563eb;">AI Coding Assistant Review</a></li>
+                                <li style="margin-bottom: 5px;"><a href="ai-tools2.html" style="text-decoration: none; color: #2563eb;">Top Text-to-Image Generators</a></li>
+                                <li style="margin-bottom: 5px;"><a href="ai-tools3.html" style="text-decoration: none; color: #2563eb;">Automating Workflows with LLMs</a></li>
+                                <li style="margin-bottom: 5px;"><a href="ai-tools4.html" style="text-decoration: none; color: #2563eb;">AI Voice Cloning Ethics</a></li>
+                                <li><a href="ai-tools5.html" style="text-decoration: none; color: #2563eb;">Smart Productivity Bots</a></li>
+                            </ul>
+                        </details>
+                    </li>
 
-            <!-- Contact Us Section -->
-            <div class="sidebar-widget" id="contact">
-                <h3>Contact Us</h3>
-                <p>Have questions, feedback, or partnership inquiries? Reach out to our team directly via email:</p>
-                <p style="margin-top: 0.75rem;">
-                    <a href="mailto:aipulse.official.mail@gmail.com" style="color: var(--primary); font-weight: 600; text-decoration: none;">aipulse.official.mail@gmail.com</a>
-                </p>
+                    <!-- 2. Latest Tech News -->
+                    <li>
+                        <details style="cursor: pointer;">
+                            <summary style="list-style: none; font-weight: bold; color: inherit; display: inline-block; margin-top: 10px;">
+                                🚀 Latest Tech News
+                            </summary>
+                            <ul style="list-style-type: circle; margin-top: 8px; margin-bottom: 5px; padding-left: 20px; font-size: 0.9rem;">
+                                <li style="margin-bottom: 5px;"><a href="latesttech1.html" style="text-decoration: none; color: #2563eb;">Next-Gen Hardware Shifts</a></li>
+                                <li style="margin-bottom: 5px;"><a href="latesttech2.html" style="text-decoration: none; color: #2563eb;">Cloud Computing Milestones</a></li>
+                                <li style="margin-bottom: 5px;"><a href="latesttech3.html" style="text-decoration: none; color: #2563eb;">Open Source Software Updates</a></li>
+                                <li style="margin-bottom: 5px;"><a href="latesttech4.html" style="text-decoration: none; color: #2563eb;">Global Semiconductor Trends</a></li>
+                                <li><a href="latesttech5.html" style="text-decoration: none; color: #2563eb;">The Rise of Edge Computing</a></li>
+                            </ul>
+                        </details>
+                    </li>
+
+                    <!-- 3. Security & Privacy -->
+                    <li>
+                        <details style="cursor: pointer;">
+                            <summary style="list-style: none; font-weight: bold; color: inherit; display: inline-block; margin-top: 10px;">
+                                🔒 Security & Privacy
+                            </summary>
+                            <ul style="list-style-type: circle; margin-top: 8px; margin-bottom: 5px; padding-left: 20px; font-size: 0.9rem;">
+                                <li style="margin-bottom: 5px;"><a href="security1.html" style="text-decoration: none; color: #2563eb;">Essential Cyber Hygiene</a></li>
+                                <li style="margin-bottom: 5px;"><a href="security2.html" style="text-decoration: none; color: #2563eb;">Advanced Threat Protection</a></li>
+                                <li style="margin-bottom: 5px;"><a href="security3.html" style="text-decoration: none; color: #2563eb;">Securing Linux Servers</a></li>
+                                <li style="margin-bottom: 5px;"><a href="security4.html" style="text-decoration: none; color: #2563eb;">Understanding Zero Trust</a></li>
+                                <li><a href="security5.html" style="text-decoration: none; color: #2563eb;">Preventing Phishing Attacks</a></li>
+                            </ul>
+                        </details>
+                    </li>
+
+                    <!-- 4. Tutorials & Guides -->
+                    <li>
+                        <details style="cursor: pointer;">
+                            <summary style="list-style: none; font-weight: bold; color: inherit; display: inline-block; margin-top: 10px;">
+                                💡 Tutorials & Guides
+                            </summary>
+                            <ul style="list-style-type: circle; margin-top: 8px; margin-bottom: 5px; padding-left: 20px; font-size: 0.9rem;">
+                                <li style="margin-bottom: 5px;"><a href="tutorials1.html" style="text-decoration: none; color: #2563eb;">Linux Terminal Basics</a></li>
+                                <li style="margin-bottom: 5px;"><a href="tutorials2.html" style="text-decoration: none; color: #2563eb;">Git and GitHub Workflow</a></li>
+                                <li style="margin-bottom: 5px;"><a href="tutorials3.html" style="text-decoration: none; color: #2563eb;">Deploying on Vercel</a></li>
+                                <li style="margin-bottom: 5px;"><a href="tutorials4.html" style="text-decoration: none; color: #2563eb;">HTML & CSS Structuring</a></li>
+                                <li><a href="tutorials5.html" style="text-decoration: none; color: #2563eb;">Setting Up SSH Keys</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
             </div>
         </aside>
 
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <h2>Welcome to AI Pulse</h2>
+            <p>Your ultimate destination featuring 20 professional technical articles divided equally across 5 posts per category (AI Tools, Latest Tech, Security, and Tutorials).</p>
+            
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+
+            <!-- Security & Privacy Posts Section -->
+            <div class="category-section">
+                <h3>🔒 Security & Privacy (Featured Posts)</h3>
+                
+                <div class="post-list-item">
+                    <a href="security1.html">Essential Cyber Hygiene: Protecting Your Digital Life in 2026</a>
+                    <div class="post-date">September 2026 | Security & Privacy</div>
+                </div>
+
+                <div class="post-list-item">
+                    <a href="security2.html">Advanced Threat Protection: Guarding Infrastructure Against Modern Exploits</a>
+                    <div class="post-date">September 2026 | Security & Privacy</div>
+                </div>
+            </div>
+
+            <!-- Other Categories Notice -->
+            <div class="category-section">
+                <h3>📚 Explore All Categories</h3>
+                <p>Use the sidebar on the left to expand and navigate through all 5 unique articles across <strong>AI Tool Reviews</strong>, <strong>Latest Tech News</strong>, <strong>Security & Privacy</strong>, and <strong>Tutorials & Guides</strong>.</p>
+            </div>
+        </main>
     </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 AI Pulse. All rights reserved.</p>
-    </footer>
-
-    <!-- Interactive JS -->
-    <script>
-        function exploreAlert() {
-            alert("Welcome to AI Pulse! Stay tuned for the latest AI insights and reviews.");
-        }
-    </script>
 
 </body>
 </html>
