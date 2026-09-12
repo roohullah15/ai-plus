@@ -1,465 +1,1502 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Pulse - Modern Tech, Linux & Security Blog</title>
-    <style>
-        :root {
-            --bg-dark: #070b14;
-            --bg-card: #0f172a;
-            --accent-gold: #f59e0b;
-            --accent-glow: rgba(245, 158, 11, 0.2);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #1e293b;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        
-        /* Top Navigation Header */
-        header {
-            background: rgba(7, 11, 20, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .logo {
-            color: var(--accent-gold);
-            margin: 0;
-            font-size: 1.6rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover {
-            color: var(--accent-gold);
-        }
-        .cta-btn {
-            background: var(--accent-gold);
-            color: #000;
-            padding: 6px 16px;
-            border-radius: 6px;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* Hero & Blog Info Section */
-        .hero-section {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-        .hero-section h1 {
-            font-size: 2.4rem;
-            color: var(--text-main);
-            margin-bottom: 15px;
-        }
-        .hero-section h1 span {
-            color: var(--accent-gold);
-        }
-        .hero-section p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            max-width: 800px;
-            margin: 0 auto 35px auto;
-        }
+<meta name="description" content="AI Pulse - AI tools, tutorials, best AI resources and latest AI news.">
+<meta name="keywords" content="AI tools, AI tutorials, best AI, AI news, artificial intelligence">
+<meta name="author" content="AI Pulse">
 
-        /* 4 Icon Cards Section (Responsive Grid) */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-            text-align: left;
-        }
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            height: 380px;
-            position: relative;
-        }
-        .feature-header {
-            text-align: center;
-            cursor: pointer;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border);
-            user-select: none;
-        }
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--accent-gold);
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin: 0 auto 12px auto;
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-        .feature-card h3 {
-            color: var(--text-main);
-            font-size: 1.1rem;
-            margin: 0 0 5px 0;
-        }
-        .card-desc {
-            color: var(--accent-gold);
-            font-size: 0.85rem;
-            margin: 0;
-            font-weight: 600;
-        }
+<title>AI Pulse | AI Tools, Tutorials & News</title>
 
-        /* Posts List inside Card */
-        .card-posts-list {
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-            overflow-y: auto;
-            max-height: 250px;
-            padding-right: 5px;
-        }
-        .card-posts-list::-webkit-scrollbar {
-            width: 5px;
-        }
-        .card-posts-list::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 10px;
-        }
-        .card-post-item {
-            background: rgba(7, 11, 20, 0.8);
-            padding: 8px 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            transition: border-color 0.2s;
-        }
-        .card-post-item:hover {
-            border-color: var(--accent-gold);
-        }
-        .card-post-item a {
-            text-decoration: none;
-            color: #38bdf8;
-            font-weight: 600;
-            font-size: 0.8rem;
-            display: block;
-            line-height: 1.3;
-        }
-        .card-post-item a:hover {
-            color: var(--accent-gold);
-            text-decoration: underline;
-        }
-        .card-post-date {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
+<style>
 
-        /* Main Container for About Us & Contact Us */
-        .main-container {
-            max-width: 900px;
-            margin: 0 auto 50px auto;
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-        .card-section {
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-        }
-        .card-section h2 {
-            color: var(--accent-gold);
-            margin-top: 0;
-            font-size: 1.6rem;
-        }
-        .contact-box {
-            background: var(--bg-dark);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            margin: 20px 0;
-            text-align: center;
-        }
-        .contact-email {
-            font-size: 1.1rem;
-            color: var(--accent-gold);
-            font-weight: bold;
-            text-decoration: none;
-            word-break: break-all;
-        }
-        .contact-email:hover {
-            text-decoration: underline;
-        }
+/* =========================
+   GLOBAL
+========================= */
 
-        /* ================= MOBILE RESPONSIVE STYLES ================= */
-        @media screen and (max-width: 768px) {
-            header {
-                padding: 12px 15px;
-                flex-direction: column;
-                gap: 12px;
-            }
-            .nav-links {
-                gap: 15px;
-            }
-            .hero-section {
-                margin: 20px auto;
-                padding: 0 15px;
-            }
-            .hero-section h1 {
-                font-size: 1.8rem;
-            }
-            .hero-section p {
-                font-size: 0.95rem;
-            }
-            .features-grid {
-                grid-template-columns: 1fr; /* په موبایل کې هر کارډ په پوره پلنوالي (Full Width) راځي */
-                gap: 20px;
-            }
-            .feature-card {
-                height: auto; /* په موبایل کې لوړوالی ازاد وي ترڅو محتوا په اسانۍ ځای شي */
-                min-height: 220px;
-            }
-            .main-container {
-                padding: 0 15px;
-            }
-            .card-section {
-                padding: 20px;
-            }
-        }
-    </style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f7fa;
+    color:#17283a;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:92%;
+    max-width:1180px;
+    margin:auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:#071a2d;
+    color:white;
+    position:sticky;
+    top:0;
+    z-index:999;
+    box-shadow:0 4px 20px rgba(0,0,0,.15);
+}
+
+.navbar{
+    min-height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:25px;
+    font-weight:800;
+}
+
+.logo-icon{
+    width:43px;
+    height:43px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#ffc928;
+    color:#071a2d;
+    font-size:23px;
+}
+
+.logo span{
+    color:#ffc928;
+}
+
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+.nav-links a{
+    color:#dbe6ef;
+    font-size:14px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.nav-links a:hover{
+    color:#ffc928;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.search-button{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid #35516b;
+    background:transparent;
+    color:white;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.subscribe{
+    background:#ffc928;
+    color:#071a2d;
+    padding:11px 17px;
+    border-radius:9px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.menu{
+    display:none;
+    border:0;
+    background:none;
+    color:white;
+    font-size:28px;
+    cursor:pointer;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    background:
+    radial-gradient(circle at 80% 35%,rgba(255,201,40,.15),transparent 30%),
+    linear-gradient(135deg,#071a2d,#0b2944);
+    color:white;
+    overflow:hidden;
+}
+
+.hero-content{
+    min-height:550px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:50px;
+    padding:65px 0;
+}
+
+.hero-small{
+    color:#ffc928;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:clamp(42px,5vw,68px);
+    line-height:1.05;
+    letter-spacing:-2px;
+    margin-bottom:22px;
+}
+
+.hero h1 span{
+    color:#ffc928;
+}
+
+.hero p{
+    color:#c4d2de;
+    font-size:17px;
+    max-width:590px;
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    padding:13px 20px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.btn-yellow{
+    background:#ffc928;
+    color:#071a2d;
+}
+
+.btn-outline{
+    border:1px solid #587189;
+    color:white;
+}
+
+.hero-visual{
+    height:410px;
+    border:3px solid #ffc928;
+    border-radius:50%;
+    padding:10px;
+    transform:rotate(2deg);
+}
+
+.hero-visual-inner{
+    height:100%;
+    border-radius:50%;
+    background:
+    radial-gradient(circle at center,rgba(53,189,248,.25),transparent 25%),
+    linear-gradient(135deg,#173f5e,#061827);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.robot{
+    font-size:150px;
+    transform:rotate(-2deg);
+    filter:drop-shadow(0 15px 20px rgba(0,0,0,.4));
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories{
+    background:white;
+    margin-top:-35px;
+    position:relative;
+    z-index:5;
+    border-radius:22px;
+    padding:25px;
+    box-shadow:0 15px 45px rgba(7,26,45,.13);
+}
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.category-card{
+    background:#0b243c;
+    color:white;
+    border-radius:17px;
+    padding:25px;
+    min-height:210px;
+    cursor:pointer;
+    transition:.25s;
+    border:1px solid transparent;
+}
+
+.category-card:hover{
+    transform:translateY(-7px);
+    border-color:#ffc928;
+    box-shadow:0 15px 30px rgba(0,0,0,.18);
+}
+
+.category-icon{
+    width:53px;
+    height:53px;
+    border-radius:14px;
+    background:rgba(255,201,40,.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#ffc928;
+    font-size:27px;
+    margin-bottom:15px;
+}
+
+.category-card h3{
+    font-size:18px;
+    margin-bottom:7px;
+}
+
+.category-card p{
+    color:#b8c9d7;
+    font-size:13px;
+}
+
+.category-arrow{
+    width:31px;
+    height:31px;
+    border-radius:50%;
+    background:#ffc928;
+    color:#071a2d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:18px;
+    font-weight:bold;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+    padding:80px 0;
+}
+
+.section-header{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    margin-bottom:30px;
+}
+
+.kicker{
+    color:#a87900;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    margin-bottom:7px;
+}
+
+.section-header h2{
+    font-size:35px;
+    line-height:1.15;
+}
+
+.view-all{
+    color:#9a7200;
+    font-weight:bold;
+    font-size:14px;
+}
+
+/* =========================
+   POSTS
+========================= */
+
+.posts-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.post{
+    background:white;
+    border:1px solid #e1e7ed;
+    border-radius:16px;
+    overflow:hidden;
+    transition:.25s;
+}
+
+.post:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(7,26,45,.12);
+}
+
+.post-image{
+    height:155px;
+    background:linear-gradient(135deg,#092844,#174c70);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+}
+
+.post-content{
+    padding:18px;
+}
+
+.tag{
+    display:inline-block;
+    background:#fff1b5;
+    color:#886500;
+    padding:4px 9px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:bold;
+    margin-bottom:9px;
+}
+
+.post h3{
+    font-size:17px;
+    line-height:1.35;
+    margin-bottom:8px;
+}
+
+.post p{
+    color:#71808e;
+    font-size:13px;
+}
+
+.post-meta{
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid #e5e9ed;
+    margin-top:14px;
+    padding-top:11px;
+    color:#87939e;
+    font-size:11px;
+}
+
+/* =========================
+   CATEGORY PAGE
+========================= */
+
+.category-page{
+    display:none;
+    background:white;
+}
+
+.category-page.active{
+    display:block;
+}
+
+.category-banner{
+    background:#071a2d;
+    color:white;
+    padding:55px 0;
+}
+
+.category-banner h2{
+    font-size:42px;
+}
+
+.category-banner p{
+    color:#b9cad8;
+    max-width:700px;
+    margin-top:8px;
+}
+
+.category-posts{
+    padding:70px 0;
+}
+
+.no-posts{
+    text-align:center;
+    background:#f5f7fa;
+    padding:50px;
+    border-radius:15px;
+    color:#71808e;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about{
+    background:white;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.about h2{
+    font-size:38px;
+    line-height:1.15;
+    margin-bottom:18px;
+}
+
+.about p{
+    color:#687987;
+    margin-bottom:15px;
+}
+
+.features{
+    display:grid;
+    gap:13px;
+}
+
+.feature{
+    display:flex;
+    gap:13px;
+    padding:15px;
+    border:1px solid #e1e7ed;
+    border-radius:13px;
+}
+
+.feature-icon{
+    font-size:23px;
+}
+
+.feature b{
+    display:block;
+}
+
+.feature small{
+    color:#758492;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-box{
+    background:#071a2d;
+    color:white;
+    border-radius:22px;
+    padding:45px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    gap:30px;
+}
+
+.contact-box h2{
+    font-size:32px;
+}
+
+.contact-box p{
+    color:#b9cad8;
+    margin-top:8px;
+}
+
+.email{
+    display:inline-block;
+    color:#ffc928;
+    font-weight:bold;
+    margin-top:10px;
+    word-break:break-all;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#041321;
+    color:white;
+    padding:60px 0 20px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1.2fr;
+    gap:40px;
+    padding-bottom:40px;
+}
+
+.footer-title{
+    font-size:15px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.footer-links{
+    display:grid;
+    gap:8px;
+}
+
+.footer-links a,
+footer p{
+    color:#9fb0bf;
+    font-size:13px;
+}
+
+.footer-links a:hover{
+    color:#ffc928;
+}
+
+.copyright{
+    border-top:1px solid #1a3044;
+    padding-top:18px;
+    color:#718596;
+    font-size:12px;
+    display:flex;
+    justify-content:space-between;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    z-index:2000;
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding-top:110px;
+}
+
+.search-modal.active{
+    display:flex;
+}
+
+.search-box{
+    background:white;
+    width:min(700px,92%);
+    padding:22px;
+    border-radius:17px;
+}
+
+.close-search{
+    float:right;
+    border:0;
+    background:none;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.search-input{
+    width:100%;
+    padding:14px;
+    border:1px solid #dce2e8;
+    border-radius:10px;
+    margin-top:15px;
+    outline:none;
+}
+
+.search-results{
+    margin-top:15px;
+    display:grid;
+    gap:8px;
+}
+
+.search-result{
+    padding:12px;
+    background:#f4f6f8;
+    border-radius:9px;
+    cursor:pointer;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+    .category-grid,
+    .posts-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero-content{
+        grid-template-columns:1fr;
+    }
+
+    .hero-visual{
+        max-width:550px;
+        width:100%;
+        margin:auto;
+    }
+
+    .footer-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:720px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .nav-links.mobile{
+        display:flex;
+        position:absolute;
+        top:76px;
+        left:0;
+        right:0;
+        background:#071a2d;
+        flex-direction:column;
+        padding:20px;
+        gap:15px;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .subscribe,
+    .search-button{
+        display:none;
+    }
+
+    .category-grid,
+    .posts-grid,
+    .about-grid,
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .categories{
+        padding:15px;
+    }
+
+    .hero-content{
+        padding:50px 0 75px;
+    }
+
+    .hero-visual{
+        height:310px;
+    }
+
+    .robot{
+        font-size:100px;
+    }
+
+    .section{
+        padding:60px 0;
+    }
+
+    .section-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .contact-box{
+        grid-template-columns:1fr;
+        padding:30px;
+    }
+
+    .copyright{
+        flex-direction:column;
+        gap:7px;
+    }
+}
+
+</style>
 </head>
+
+
 <body>
 
-    <!-- Header & Navbar with Logo -->
-    <header>
-        <h1 class="logo">⚡ AI Pulse</h1>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#about-section">About Us</a></li>
-            <li><a href="#contact-section">Contact Us</a></li>
-        </ul>
-        <a href="#contact-section" class="cta-btn">Get Started</a>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <h1>Welcome to <span>AI Pulse</span></h1>
-        <p>Your ultimate digital hub for mastering Linux system administration, exploring smart AI tools, strengthening cybersecurity practices, and building modern web applications.</p>
-        
-        <!-- 4 Icon Cards -->
-        <div class="features-grid">
-            
-            <!-- 1. AI Tool Reviews Card -->
-            <div class="feature-card">
-                <div class="feature-header" onclick="togglePosts('ai-tools-list', this)">
-                    <div class="feature-icon">🤖</div>
-                    <h3>AI Tool Reviews</h3>
-                    <p class="card-desc">Click to open &darr;</p>
-                </div>
-                <div id="ai-tools-list" class="card-posts-list">
-                    <div class="card-post-item">
-                        <a href="ai-tools-1.html">AI Coding Assistant Review: Speeding Up Development Workflows</a>
-                        <div class="card-post-date">Sep 2026 | AI Tools</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="ai-tools-2.html">Top Text-to-Image Generators Compared for Designers</a>
-                        <div class="card-post-date">Sep 2026 | AI Tools</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="ai-tools-3.html">Automating Daily Workflows Using Large Language Models</a>
-                        <div class="card-post-date">Sep 2026 | AI Tools</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="ai-tools-4.html">The Growing Ethics and Challenges of AI Voice Cloning</a>
-                        <div class="card-post-date">Sep 2026 | AI Tools</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="ai-tools-5.html">Smart Productivity Bots to Keep Your Tasks Organized</a>
-                        <div class="card-post-date">Sep 2026 | AI Tools</div>
-                    </div>
-                </div>
-            </div>
+<!-- =========================
+     HEADER
+========================= -->
 
-            <!-- 2. Latest Tech News Card -->
-            <div class="feature-card">
-                <div class="feature-header" onclick="togglePosts('tech-news-list', this)">
-                    <div class="feature-icon">🚀</div>
-                    <h3>Latest Tech News</h3>
-                    <p class="card-desc">Click to open &darr;</p>
-                </div>
-                <div id="tech-news-list" class="card-posts-list">
-                    <div class="card-post-item">
-                        <a href="tech-news-1.html">Next-Gen Hardware Shifts: What to Expect in Processors</a>
-                        <div class="card-post-date">Sep 2026 | Tech News</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="tech-news-2.html">Cloud Computing Milestones and Enterprise Adoption</a>
-                        <div class="card-post-date">Sep 2026 | Tech News</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="tech-news-3.html">Open Source Software Updates Changing the Landscape</a>
-                        <div class="card-post-date">Sep 2026 | Tech News</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="tech-news-4.html">Global Semiconductor Trends and Manufacturing Growth</a>
-                        <div class="card-post-date">Sep 2026 | Tech News</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="tech-news-5.html">The Rise of Edge Computing in Modern Architecture</a>
-                        <div class="card-post-date">Sep 2026 | Tech News</div>
-                    </div>
-                </div>
-            </div>
+<header>
 
-            <!-- 3. Security & Privacy Card -->
-            <div class="feature-card">
-                <div class="feature-header" onclick="togglePosts('security-list', this)">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Security & Privacy</h3>
-                    <p class="card-desc">Click to open &darr;</p>
-                </div>
-                <div id="security-list" class="card-posts-list">
-                    <div class="card-post-item">
-                        <a href="security-1.html">Essential Cyber Hygiene: Protecting Your Digital Life in 2026</a>
-                        <div class="card-post-date">Sep 2026 | Security</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="security-2.html">Advanced Threat Protection: Guarding Infrastructure Against Exploits</a>
-                        <div class="card-post-date">Sep 2026 | Security</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="security-3.html">Securing Linux Servers: Essential Hardening Steps</a>
-                        <div class="card-post-date">Sep 2026 | Security</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="security-4.html">Understanding Zero Trust Architecture in Enterprise Networks</a>
-                        <div class="card-post-date">Sep 2026 | Security</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="security-5.html">Preventing Sophisticated Phishing Attacks and Social Engineering</a>
-                        <div class="card-post-date">Sep 2026 | Security</div>
-                    </div>
-                </div>
-            </div>
+<div class="container navbar">
 
-            <!-- 4. Tutorial & Guides Card -->
-            <div class="feature-card">
-                <div class="feature-header" onclick="togglePosts('tutorials-list', this)">
-                    <div class="feature-icon">💡</div>
-                    <h3>Tutorial & Guides</h3>
-                    <p class="card-desc">Click to open &darr;</p>
-                </div>
-                <div id="tutorials-list" class="card-posts-list">
-                    <div class="card-post-item">
-                        <a href="tutorial-1.html">Linux Terminal Basics: Essential Commands Every Admin Needs</a>
-                        <div class="card-post-date">Sep 2026 | Tutorials</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="tutorial-2.html">Git and GitHub Workflow for Seamless Version Control</a>
-                        <div class="card-post-date">Sep 2026 | Tutorials</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="tutorial-3.html">Deploying Web Projects Efficiently on Vercel</a>
-                        <div class="card-post-date">Sep 2026 | Tutorials</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="tutorial-4.html">HTML & CSS Structuring for Modern Clean Websites</a>
-                        <div class="card-post-date">Sep 2026 | Tutorials</div>
-                    </div>
-                    <div class="card-post-item">
-                        <a href="tutorial-5.html">Setting Up Secure SSH Keys for Remote Server Access</a>
-                        <div class="card-post-date">Sep 2026 | Tutorials</div>
-                    </div>
-                </div>
-            </div>
+<a href="#home" class="logo">
+    <div class="logo-icon">🤖</div>
+    AI <span>Pulse</span>
+</a>
 
-        </div>
-    </section>
+<nav id="navigation">
 
-    <!-- Lower Section: About Us & Contact Us -->
-    <div class="main-container">
-        <!-- About Us Section -->
-        <div id="about-section" class="card-section">
-            <h2>About Us</h2>
-            <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Welcome to AI Pulse - Your Trusted Tech Hub</div>
-            <p>AI Pulse is a modern technology blog dedicated to delivering authentic, original, and high-quality technical insights. Our focus centers on empowering developers, system administrators, and tech enthusiasts with practical knowledge in Linux, cloud engineering, and web development.</p>
-        </div>
+<ul class="nav-links">
 
-        <!-- Contact Us Section -->
-        <div id="contact-section" class="card-section">
-            <h2>Contact Us</h2>
-            <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Get in touch with the AI Pulse team</div>
-            <p>Have questions, feedback, or suggestions regarding our Linux tutorials, cybersecurity guides, or AI tool reviews? We would love to hear from you.</p>
-            
-            <div class="contact-box">
-                <p style="margin: 0 0 8px 0; color: var(--text-muted); font-size: 0.9rem;">You can directly reach us via official email:</p>
-                <a href="mailto:aipluse.official.mail.@gmail.com" class="contact-email">aipluse.official.mail.@gmail.com</a>
-            </div>
-        </div>
-    </div>
+<li>
+<a href="#home">Home</a>
+</li>
 
-    <!-- JavaScript to toggle posts -->
-    <script>
-        function togglePosts(listId, headerElement) {
-            const listElement = document.getElementById(listId);
-            const cardElement = headerElement.closest('.feature-card');
-            const descElement = headerElement.querySelector('.card-desc');
-            
-            if (listElement.style.display === "flex") {
-                listElement.style.display = "none";
-                cardElement.style.height = window.innerWidth > 768 ? "380px" : "auto";
-                descElement.innerText = "Click to open \u2193";
-            } else {
-                listElement.style.display = "flex";
-                cardElement.style.height = window.innerWidth > 768 ? "380px" : "auto";
-                descElement.innerText = "Click to close \u2191";
-            }
-        }
-    </script>
+<li>
+<a href="#categories">Categories</a>
+</li>
 
-</body>
-</html>
+<li>
+<a href="#latest">Latest</a>
+</li>
+
+<li>
+<a href="#about">About Us</a>
+</li>
+
+<li>
+<a href="#contact">Contact Us</a>
+</li>
+
+</ul>
+
+</nav>
+
+
+<div class="nav-right">
+
+<button class="search-button" onclick="openSearch()">
+⌕
+</button>
+
+<a href="#contact" class="subscribe">
+Get Started →
+</a>
+
+<button class="menu" onclick="toggleMenu()">
+☰
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<main id="home">
+
+<section class="hero">
+
+<div class="container hero-content">
+
+<div>
+
+<div class="hero-small">
+Welcome to AI Pulse
+</div>
+
+<h1>
+Discover the Best
+<span>AI Tools & Technology</span>
+</h1>
+
+<p>
+Explore AI tools, practical tutorials, useful recommendations,
+and the latest artificial intelligence news — all in one place.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#categories" class="btn btn-yellow">
+Explore Categories ↗
+</a>
+
+<a href="#latest" class="btn btn-outline">
+Latest Articles →
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-visual">
+
+<div class="hero-visual-inner">
+
+<div class="robot">
+🤖
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     FOUR CATEGORIES
+========================= -->
+
+<section id="categories" class="container categories">
+
+<div class="category-grid">
+
+
+<!-- CATEGORY 1 -->
+
+<article
+class="category-card"
+onclick="showCategory('tools')"
+>
+
+<div class="category-icon">
+🤖
+</div>
+
+<h3>
+AI Tools & Reviews
+</h3>
+
+<p>
+Discover useful AI tools, reviews,
+features, comparisons and alternatives.
+</p>
+
+<div class="category-arrow">
+→
+</div>
+
+</article>
+
+
+
+<!-- CATEGORY 2 -->
+
+<article
+class="category-card"
+onclick="showCategory('tutorials')"
+>
+
+<div class="category-icon">
+🎓
+</div>
+
+<h3>
+AI Tutorials & Guides
+</h3>
+
+<p>
+Simple step-by-step guides for
+using AI tools effectively.
+</p>
+
+<div class="category-arrow">
+→
+</div>
+
+</article>
+
+
+
+<!-- CATEGORY 3 -->
+
+<article
+class="category-card"
+onclick="showCategory('best-ai')"
+>
+
+<div class="category-icon">
+⭐
+</div>
+
+<h3>
+Best AI For...
+</h3>
+
+<p>
+Find useful AI tools for coding,
+writing, students, business and more.
+</p>
+
+<div class="category-arrow">
+→
+</div>
+
+</article>
+
+
+
+<!-- CATEGORY 4 -->
+
+<article
+class="category-card"
+onclick="showCategory('news')"
+>
+
+<div class="category-icon">
+📰
+</div>
+
+<h3>
+AI News & Updates
+</h3>
+
+<p>
+Follow important AI releases,
+updates, features and trends.
+</p>
+
+<div class="category-arrow">
+→
+</div>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     LATEST POSTS
+========================= -->
+
+<section id="latest" class="container section">
+
+<div class="section-header">
+
+<div>
+
+<div class="kicker">
+Latest Articles
+</div>
+
+<h2>
+Fresh From AI Pulse
+</h2>
+
+</div>
+
+<a href="#categories" class="view-all">
+Browse Categories →
+</a>
+
+</div>
+
+
+<div id="latestPosts" class="posts-grid">
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     CATEGORY PAGE
+========================= -->
+
+<section id="categoryPage" class="category-page">
+
+<div class="category-banner">
+
+<div class="container">
+
+<div class="kicker">
+AI Pulse Category
+</div>
+
+<h2 id="categoryTitle">
+Category
+</h2>
+
+<p id="categoryDescription">
+</p>
+
+</div>
+
+</div>
+
+
+<div class="container category-posts">
+
+<div id="categoryPosts" class="posts-grid">
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     ABOUT US
+========================= -->
+
+<section id="about" class="about section">
+
+<div class="container about-grid">
+
+
+<div>
+
+<div class="kicker">
+About AI Pulse
+</div>
+
+<h2>
+Making AI easier to understand and use.
+</h2>
+
+<p>
+AI Pulse is an independent technology blog focused on
+practical artificial intelligence information.
+</p>
+
+<p>
+Our goal is to make useful AI knowledge easier to discover
+for students, creators, developers, professionals and everyday users.
+</p>
+
+<p>
+We publish AI tool reviews, tutorials, comparisons,
+recommendations and important AI updates in a clear,
+simple and useful format.
+</p>
+
+</div>
+
+
+
+<div class="features">
+
+
+<div class="feature">
+
+<div class="feature-icon">
+📚
+</div>
+
+<div>
+
+<b>
+Practical Guides
+</b>
+
+<small>
+Step-by-step content designed for real-world use.
+</small>
+
+</div>
+
+</div>
+
+
+
+<div class="feature">
+
+<div class="feature-icon">
+🔎
+</div>
+
+<div>
+
+<b>
+Useful Information
+</b>
+
+<small>
+Clear explanations and comparisons to help you choose.
+</small>
+
+</div>
+
+</div>
+
+
+
+<div class="feature">
+
+<div class="feature-icon">
+⚡
+</div>
+
+<div>
+
+<b>
+AI Updates
+</b>
+
+<small>
+Follow important developments in the fast-moving AI world.
+</small>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section id="contact" class="container section">
+
+<div class="contact-box">
+
+<div>
+
+<div class="kicker">
+Contact Us
+</div>
+
+<h2>
+Have a question or suggestion?
+</h2>
+
+<p>
+For feedback, suggestions, corrections or general inquiries,
+contact the AI Pulse team.
+</p>
+
+<a
+class="email"
+href="mailto:aipluse.official.mail@gmail.com"
+>
+aipluse.official.mail@gmail.com
+</a>
+
+</div>
+
+
+<a
+href="mailto:aipluse.official.mail@gmail.com"
+class="btn btn-yellow"
+>
+Email Us →
+</a>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+
+<div>
+
+<div class="logo">
+<div class="logo-icon">
+🤖
+</div>
+
+AI <span>Pulse</span>
+</div>
+
+<br>
+
+<p>
+Your practical destination for AI tools,
+tutorials, recommendations and news.
+</p>
+
+</div>
+
+
+
+<div>
+
+<div class="footer-title">
+Quick Links
+</div>
+
+<div class="footer-links">
+
+<a href="#home">
+Home
+</a>
+
+<a href="#categories">
+Categories
+</a>
+
+<a href="#latest">
+Latest Articles
+</a>
+
+<a href="#about">
+About Us
+</a>
+
+<a href="#contact">
+Contact Us
+</a>
+
+</div>
+
+</div>
+
+
+
+<div>
+
+<div class="footer-title">
+Categories
+</div>
+
+<div class="footer-links">
+
+<a href="#categories"
+onclick="showCategory('tools')">
+AI Tools & Reviews
+</a>
+
+<a href="#categories"
+onclick="showCategory('tutorials')">
+AI Tutorials & Guides
+</a>
+
+<a href="#categories"
+onclick="showCategory('best-ai')">
+Best AI For...
+</a>
+
+<a href="#categories"
+onclick="showCategory('news')">
+AI News & Updates
+</a>
+
+</div>
+
+</div>
+
+
+
+<div>
+
+<div class="footer-title">
+Contact
+</div>
+
+<p>
+Email
+</p>
+
+<a
+class="email"
+href="mailto:aipluse.official.mail@gmail.com"
+>
+aipluse.official.mail@gmail.com
+</a>
+
+</div>
+
+
+</div>
+
+
+<div class="copyright">
+
+<span>
+© 2026 AI Pulse. All rights reserved.
+</span>
+
+<span>
+Built for AI learners, creators & professionals.
+</span>
+
+</div>
+
+</div>
+
+</footer>
+
+
+
+<!-- =========================
+     SEARCH MODAL
+========================= -->
+
+<div
+id="searchModal"
+class="search-modal"
+onclick="closeSearchOutside(event)"
+>
+
+<div class="search-box">
+
+<button
+class="close-search"
+onclick="closeSearch()"
+>
+×
+</button>
+
+<h3>
+Search AI Pulse
+</h3>
+
+<input
+id="searchInput"
+class="search-input"
+type="search"
+placeholder="Search articles..."
+oninput="searchPosts()"
+>
+
+<div
+id="searchResults"
+class="search-results"
+>
+</div>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   AI PULSE ARTICLE DATABASE
+
+   ADD UNLIMITED POSTS HERE
+
+   category:
+   tools
+   tutorials
+   best-ai
+   news
+
+===================================================== */
+
+
+const posts = [
+
+/* =========================
+   AI TOOLS
+========================= */
+
+{
+id:1,
+
+category:"tools",
+
+title:"Best AI Tools for Everyday Productivity",
+
+excerpt:"Explore practical AI tools that can help with writing, research, planning and everyday work.",
+
+date:"September 2026",
+
+read:"6 min read",
+
+icon:"🤖"
+},
+
+
+{
+id:2,
+
+category:"tools",
+
+title:"Best AI Coding Assistants",
+
+excerpt:"Discover how AI coding assistants can help developers write and understand code.",
+
+date:"September 2026",
+
+read:"7 min read",
+
+icon:"💻"
+},
+
+
+{
+id:3,
+
+category:"tools",
+
+title:"Best Free AI Tools You Should Try",
+
+excerpt:"A useful collection of free AI tools for work, study, creativity and productivity.",
+
+date:"September 2026",
+
+read:"6 min read",
+
+icon:"⚡"
+},
+
+
+{
+id:4,
+
+category:"tools",
+
+title:"AI Writing Tools Compared",
+
+excerpt:"Understand the differences between popular AI writing tools and their main features.",
+
+date:"September 2026",
+
+read:"8 min read",
+
+ic
